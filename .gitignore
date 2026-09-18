@@ -1,0 +1,25 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+.DS_Store
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+# 本地 agent 配置,不要随主题包发布(npm pack 无 .npmignore 时回退读 .gitignore)
+.claude/
+.playwright-mcp/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

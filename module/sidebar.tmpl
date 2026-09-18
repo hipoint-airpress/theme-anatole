@@ -1,0 +1,27 @@
+<div class="sidebar animated fadeInDown">
+    <div class="logo-title">
+        <div class="title">
+            <img alt="Logo" class="inline-block"
+                 src="{{ blog_logo|default:user.Avatar }}"
+                 style="width:127px;{%- if settings.avatar_circle -%}border-radius:50%{%- endif -%}"/>
+            <h3 class="!mt-3 !mb-0">
+                <a href="{{ blog_url }}" title="{{ blog_title }}">{{ blog_title }}</a>
+            </h3>
+            <div class="description mt-2">
+                <p class="description-text">{{ user.Description }}</p>
+            </div>
+        </div>
+    </div>
+    {% include "caicai_anatole/module/social-list" %}
+    <div class="footer">
+        <a target="_blank" href="#">
+            <a href="https://www.caicai.me">Designed by CaiCai</a>
+            <div class="by_airpress">
+                <a href="https://github.com/hipoint-airpress/airpress" target="_blank">Proudly published with AirPress</a>
+            </div>
+            <div class="footer_text">
+                {% include "common/macro/footer" %}
+            </div>
+        </a>
+    </div>
+</div>

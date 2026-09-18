@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+    <html lang="zh">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>{{ blog_title }}</title>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+        <meta name="format-detection" content="telephone=no"/>
+        <meta name="renderer" content="webkit"/>
+        <meta name="author" content="{{ user.Nickname }}"/>
+        <meta name="keywords" content="{{ meta_keywords }}"/>
+        <meta name="description" content="{{ meta_description }}"/>
+        <link rel="alternate" type="application/rss+xml" title="atom 1.0" href="{{ atom_url }}"/>
+        {% include "common/macro/head" %}
+        {% include "caicai_anatole/module/styles" %}
+    </head>
+    <body x-data="{ postSearchVisible: false }">
+    {% include "caicai_anatole/module/sidebar" %}
+    <div class="main">
+        {% include "caicai_anatole/module/page-top" %}
+        <div class="content">
+            <div x-data="posts">
+                {% include "caicai_anatole/module/post-entry" %}
+            </div>
+            {% if posts.Pages > 1 %}
+                {% set pagination = indexPagination(posts.PageNum, posts.Pages, 3) %}
+                <div class="pagination flex justify-between items-center">
+                    {% if pagination.HasPrev %}
+                        <a class="btn w-20" role="navigation" href="{{ pagination.PrevPageFullPath }}"
+                           title="上一页">上一页</a>
+                    {% endif %}
+                    <span class="text-sm">{{ posts.PageNum|add:1 }}/{{ posts.Pages }}</span>
+                    {% if pagination.HasNext %}
+                        <a class="btn w-20" role="navigation" href="{{ pagination.NextPageFullPath }}"
+                           title="下一页">下一页</a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    {% include "caicai_anatole/module/post-search-modal" %}
+    {% include "caicai_anatole/module/post-likes/scripts" %}
+    </body>
+    </html>

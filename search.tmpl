@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+    <html lang="zh">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>搜索结果： {{ blog_title }}</title>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+        <meta name="format-detection" content="telephone=no"/>
+        <meta name="renderer" content="webkit"/>
+        <meta name="author" content="{{ user.Nickname }}"/>
+        <meta name="keywords" content="{{ meta_keywords }}"/>
+        <meta name="description" content="{{ meta_description }}"/>
+        <link rel="alternate" type="application/rss+xml" title="atom 1.0" href="{{ atom_url }}"/>
+        {% include "common/macro/head" %}
+        {% include "caicai_anatole/module/styles" %}
+        
+    </head>
+    <body x-data="{ postSearchVisible: false }">
+    {% include "caicai_anatole/module/sidebar" %}
+    <div class="main">
+        {% include "caicai_anatole/module/page-top" %}
+        <div class="content">
+            {% include "caicai_anatole/module/page-heading" with title=printf("%s%s", "搜索：", keyword) subtitle=printf("%s%s", posts.Total, " 篇文章") %}
+            {% if posts.Content %}
+                <div x-data="posts">
+                    {% include "caicai_anatole/module/post-entry" %}
+                </div>
+                {% if posts.Pages > 1 %}
+                    {% set pagination = searchPagination(posts.PageNum, posts.Pages, 3, keyword) %}
+                    <div class="pagination flex justify-between items-center">
+                        {% if pagination.HasPrev %}
+                            <a class="btn" role="navigation" href="{{ pagination.PrevPageFullPath }}">上一页</a>
+                        {% endif %}
+                        <span class="text-sm">{{ posts.PageNum|add:1 }}/{{ posts.Pages }}</span>
+                        {% if pagination.HasNext %}
+                            <a class="btn" role="navigation" href="{{ pagination.NextPageFullPath }}">下一页</a>
+                        {% endif %}
+                    </div>
+
+                {% endif %}
+            {% else %}
+                <div class="">
+                    <h3 class="page-title">没有找到任何东西！</h3>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    {% include "caicai_anatole/module/post-likes/scripts" %}
+    {% include "caicai_anatole/module/post-search-modal" %}
+    </body>
+    </html>
