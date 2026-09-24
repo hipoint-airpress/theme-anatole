@@ -36,7 +36,7 @@
                                         <i class="iconify w-5 h-5" data-icon="mdi:folder-outline"></i>
                                         <span class="ml-2">
                                         {{ category.Name }}
-                                        <sup class="text-gray-400 ml-1">{{ category.PostCount }}</sup>
+                                        <sup class="text-gray-400 ml-1 align-baseline">{{ category.PostCount }}</sup>
                                     </span>
                                     </div>
                                 </a>
@@ -45,8 +45,8 @@
                                     {% set posts = listPostByCategoryID(category.ID) %}
                                     <div class="flex flex-col pl-5 gap-y-2">
                                         {% if posts|length > 0 %}
-                                            {% for post_index, post in posts %}
-                                                {% if post_index < 10 %}
+                                            {% for post in posts %}
+                                                {% if forloop.Counter0 < 10 %}
                                                     <div class="flex justify-between">
                                                         <a href="{{ post.FullPath }}"
                                                            class="text-sm text-black/80 hover:text-black hover:underline hover:font-medium">{{ post.Title }}</a>
